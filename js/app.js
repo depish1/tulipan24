@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     const offers = document.querySelector("#offers");
     const gMap = document.querySelector("#gMap");
     const contact = document.querySelector("#contact");
+    console.log(offers);
 
     const sticky = navbar.offsetTop;
 
@@ -31,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
       logo.classList.remove("sticky-logo");
     }
 
-    if (window.location.pathname == "/index.html") {
+    if (offers != null) {
       [main, offers, gMap, contact].forEach((el) => {
         const menuElement = document.querySelector(`#${el.id}Link`);
         console.log(menuElement);
