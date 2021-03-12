@@ -1,0 +1,67 @@
+html {
+    font-family: 'Open Sans', sans-serif;
+    scroll-behavior: smooth;
+}
+
+
+
+.headline3__box {
+    padding: 1rem 0;
+    transition: border-width 2s linear;
+    display: inline-block;
+    font-size: 2rem;
+    position: relative;
+
+    @media screen and (max-width: 767px) {
+        font-size: 1.5rem;
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 4px;
+        width: 0;
+        background-color: $base-color;
+        transition: width 1s ease;
+    }
+
+    &--animate::after {
+        width: 100%;
+    }
+}
+
+    .headline4__box {
+        padding: 0.5rem 0;
+        transition: border-width 2s linear;
+        display: inline-block;
+        font-size: 0;
+        position: relative;
+        transition: font-size 1s ease;
+
+        &::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 2px;
+            width: 0;
+            background-color: $base-color;
+            transition: width 1s ease;
+        }
+
+        &--animate {
+        font-size: 1.5rem;
+
+        @media screen and (max-width: 767px) {
+            font-size: 1rem;
+        }
+        
+
+            &::after {
+                width: 100%;
+            }
+        }
+    }
+
