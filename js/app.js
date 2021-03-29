@@ -1,12 +1,73 @@
+import images from "./images";
+import { categoryList } from "./images";
 const hamburger = document.querySelector("#hamburger");
 const navUl = document.querySelector("#nav");
 
 hamburger.addEventListener("click", () => {
-  console.log(navUl.classList);
+  document.querySelector(".icon-menu").classList.toggle("none");
+  document.querySelector(".icon-cancel").classList.toggle("none");
   navUl.classList.toggle("show");
 });
 
+const renderImages = (dest, categories, images) => {
+  categories.forEach(({ categoryName, nameToShow }) => {
+    const newSection = document.createElement("section");
+    newSection.id = categoryName;
+    newSection.classList.add("gallery__section");
+    const newHeadline = document.createElement("div");
+    newHeadline.classList.add("headline3__box");
+    newHeadline.innerHTML = `<h3>${nameToShow}</h3>`;
+    const newContainer = document.createElement("article");
+    newContainer.classList.add("gallery__photo-container");
+    images
+      .filter((image) => image.category == categoryName)
+      .forEach((filteredImage) => {
+        newContainer.insertAdjacentHTML(
+          "beforeend",
+          `<img src="./assets/gallery/${categoryName}/light/${filteredImage.fileName}" data-fileName="${filteredImage.fileName}" data-category="${filteredImage.category}" alt="Zdjęcie kwiatów" class="gallery__photo">`
+        );
+      });
+    newSection.appendChild(newHeadline);
+    newSection.appendChild(newContainer);
+    dest.appendChild(newSection);
+  });
+};
+
 document.addEventListener("DOMContentLoaded", function (event) {
+  const gallery = document.querySelector(".gallery");
+
+  if (gallery) {
+    renderImages(gallery, categoryList, images);
+
+    let isModalOpen = false;
+    const modal = document.getElementById("modal");
+    const showImgInModal = (e) => {
+      if (e.target.tagName != "IMG") return;
+      if (isModalOpen) return;
+      isModalOpen = true;
+      const imgWeight = window.innerWidth < 1000 ? "mobile" : "full";
+      const path = `./assets/gallery/${e.target.dataset.category}/${imgWeight}/${e.target.dataset.filename}`;
+      const modalContent = document.getElementById("modalContent");
+      modalContent.innerHTML = `<span id='close' class="gallery__modal-close">&times;</span><img src="${path}">`;
+      modal.classList.toggle("none");
+    };
+
+    const closeModal = (e) => {
+      console.log(e.target.id);
+      if (!isModalOpen) return;
+      if (!["modal", "close"].includes(e.target.id)) return;
+      isModalOpen = false;
+      modal.classList.toggle("none");
+    };
+
+    modal.addEventListener("click", (e) => {
+      closeModal(e);
+    });
+    gallery.addEventListener("click", (e) => {
+      showImgInModal(e);
+    });
+  }
+
   document.addEventListener("scroll", function (event) {
     const windowOffsetTop = window.innerHeight * 0.7 + window.scrollY;
     const windowOffsetTop2 = window.pageYOffset + window.innerHeight / 2;
