@@ -11,13 +11,9 @@ hamburger.addEventListener("click", () => {
 
 const renderImages = (dest, categories, images) => {
   categories.forEach(({ categoryName, nameToShow }) => {
-    const newSection = document.createElement("section");
-    newSection.id = categoryName;
-    newSection.classList.add("gallery__section");
-    const newHeadline = document.createElement("div");
-    newHeadline.classList.add("headline3__box");
-    newHeadline.innerHTML = `<h3>${nameToShow}</h3>`;
+    const section = document.getElementById(categoryName);
     const newContainer = document.createElement("article");
+
     newContainer.classList.add("gallery__photo-container");
     images
       .filter((image) => image.category == categoryName)
@@ -27,9 +23,7 @@ const renderImages = (dest, categories, images) => {
           `<img src="./assets/gallery/${categoryName}/light/${filteredImage.fileName}" data-fileName="${filteredImage.fileName}" data-category="${filteredImage.category}" alt="Zdjęcie kwiatów" class="gallery__photo">`
         );
       });
-    newSection.appendChild(newHeadline);
-    newSection.appendChild(newContainer);
-    dest.appendChild(newSection);
+    section.appendChild(newContainer);
   });
 };
 
