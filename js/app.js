@@ -20,7 +20,7 @@ const renderImages = (dest, categories, images) => {
       .forEach((filteredImage) => {
         newContainer.insertAdjacentHTML(
           "beforeend",
-          `<img src="./assets/gallery/${categoryName}/light/${filteredImage.fileName}" data-fileName="${filteredImage.fileName}" data-category="${filteredImage.category}" alt="Zdjęcie kwiatów" class="gallery__photo">`
+          `<img src="./assets/gallery/${categoryName}/light/${filteredImage.fileName}" data-fileName="${filteredImage.fileName}" data-category="${filteredImage.category}" alt="Zdjęcie kwiatów" class="gallery__photo" />`
         );
       });
     section.appendChild(newContainer);
